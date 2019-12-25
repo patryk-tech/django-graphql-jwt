@@ -10,6 +10,8 @@ It uses [django](https://www.djangoproject.com/), [graphene-django](https://docs
 
 This is more suitable for tests than a production environment. The instructions in the [Django deployment checklist](https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/) are a good start.
 
+It also disables the CSRF protection for simplicity.
+
 ## Requirements
 
 This requires `docker` with *Docker Engine* 18.06.0 or greater, and `docker-compose`.
@@ -27,11 +29,17 @@ Just clone the repository.
 
 ### Running
 
-Open the example 
 Run `docker-compose up`.
+
+Be sure to apply Django migrations (`python manage.py migrate`) inside the Django container, and to install NPM packages (`yarn install`) inside the Vue container.
+
 
 The project should then be available on [http://localhost:10232](http://localhost:10232), and the GraphiQL interface should be available on [http://localhost:10233/graphql/](http://localhost:10233/graphql/).
 
 You may change the ports in the `docker-compose.yml` file, but in that case, you should also change it in `vue/quasar.conf.js`, under `devServer.public`, and in `django/apolloex/settings.py`, under `CORS_ORIGIN_WHITELIST`.
 
-Be sure to apply Django migrations (`python manage.py migrate`) inside the Django container.
+### Querying with cURL
+
+You can use the `curl` client, assuming it is installed, to query GraphQL.
+
+    curl -d '{"query": "query { hello }"}' -H 'Content-Type: application/json' http://localhost:10233/graphql/
