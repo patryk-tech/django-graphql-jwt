@@ -7,5 +7,8 @@
 <script>
 export default {
   name: 'App',
+  beforeMount() {
+    this.$q.dark.set(true);
+  },
 };
 </script>
