@@ -30,6 +30,8 @@ Just clone the repository.
 Open the example 
 Run `docker-compose up`.
 
-The project should then be available on [http://localhost:10232](http://localhost:10232). You may change the ports in the `docker-compose.yml` file, but in that case, you should also change it in `vue/quasar.conf.js`, under `devServer.public`, and in `django/apolloex/settings.py`, under `CORS_ORIGIN_WHITELIST`.
+The project should then be available on [http://localhost:10232](http://localhost:10232), and the GraphiQL interface should be available on [http://localhost:10233/graphql/](http://localhost:10233/graphql/).
+
+You may change the ports in the `docker-compose.yml` file, but in that case, you should also change it in `vue/quasar.conf.js`, under `devServer.public`, and in `django/apolloex/settings.py`, under `CORS_ORIGIN_WHITELIST`.
 
 Be sure to apply Django migrations (`python manage.py migrate`) inside the Django container.

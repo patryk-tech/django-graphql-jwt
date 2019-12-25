@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "corsheaders",
+    "graphene_django",
 ]
 
 MIDDLEWARE = [
@@ -118,3 +119,7 @@ STATIC_URL = "/static/"
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:10232",
 ]
+
+GRAPHENE = {
+    "SCHEMA": "apolloex.schema.schema",
+}
