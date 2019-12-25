@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+  django:
+    build:
+      context: ./django
+    environment:
+      # Use safe techniques to override the unsafe default key
+      # Personal recommendation is GitLab-CI
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY-UnsafeDefaultKeyIsNotSecretAsItWasPushedToRepo}
+      - DEBUG=TRUE
+    entrypoint:
+      - python
+      - manage.py
+      - runserver
+      - "0:8000"
+    ports:
+      - "10233:8000"
+    volumes:
+      - "./django/:/app"
+      - "../../graphql_jwt/:/app/graphql_jwt"
+  vue:
+    build:
+      context: ./vue
+    entrypoint:
+      - quasar
+      - dev
+    ports:
+      - "10232:8080"
+    volumes:
+      - "./vue:/vue"
