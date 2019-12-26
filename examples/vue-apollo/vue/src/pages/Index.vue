@@ -1,6 +1,11 @@
 <template>
-  <q-page class="flex flex-center">
-    {{ hello }}
+  <q-page class="flex flex-center q-gutter-md">
+    <section>
+      {{ hello }}
+    </section>
+    <section>
+      <login />
+    </section>
   </q-page>
 </template>
 
@@ -11,6 +16,9 @@ export default {
   name: 'PageIndex',
   apollo: {
     hello,
+  },
+  components: {
+    Login: () => import('components/Login'),
   },
 };
 </script>
