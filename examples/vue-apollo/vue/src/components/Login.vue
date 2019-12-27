@@ -21,6 +21,9 @@
         <q-btn label="Reset" type="reset" color="primary" flat />
       </div>
     </q-form>
+    <div>
+      Token: {{ token }}
+    </div>
   </div>
 </template>
 
@@ -32,6 +35,7 @@ export default {
     return {
       username: null,
       password: null,
+      token: null,
     };
   },
   methods: {
@@ -46,7 +50,11 @@ export default {
           username: this.username,
           password: this.password,
         },
-      });
+      })
+        .then((data) => {
+          this.token = (data.data.tokenAuth.token);
+          return this.token;
+        });
     },
   },
 };
