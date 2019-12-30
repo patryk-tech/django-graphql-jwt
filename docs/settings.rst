@@ -264,6 +264,22 @@ JWT_COOKIE_SECURE
   Default: ``False``
 
 
+JWT_ALLOW_JWT_COOKIE
+~~~~~~~~~~~~~~~~~~~~
+
+  Whether to allow storing the JWT in a cookie. This may be vulnerable to CSRF attacks, and you may want to disable it.
+
+  Default: ``True``
+
+
+JWT_ALLOW_REFRESH_TOKEN_COOKIE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Whether to allow storing the refresh token in a cookie. This allows using the cookie for "silent" refreshes.
+
+  Default: ``True``
+
+
 .. _JWT_ALGORITHM: https://pyjwt.readthedocs.io/en/latest/algorithms.html
 .. _JWT_AUDIENCE: http://pyjwt.readthedocs.io/en/latest/usage.html#audience-claim-aud
 .. _JWT_ISSUER: http://pyjwt.readthedocs.io/en/latest/usage.html#issuer-claim-iss

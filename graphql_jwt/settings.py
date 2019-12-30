@@ -36,6 +36,8 @@ DEFAULTS = {
     'graphql_jwt.refresh_token.utils.get_refresh_token_by_model',
     'JWT_ALLOW_ANY_HANDLER': 'graphql_jwt.middleware.allow_any',
     'JWT_ALLOW_ANY_CLASSES': (),
+    'JWT_ALLOW_JWT_COOKIE': True,
+    'JWT_ALLOW_REFRESH_TOKEN_COOKIE': True,
     'JWT_COOKIE_NAME': 'JWT',
     'JWT_REFRESH_TOKEN_COOKIE_NAME': 'JWT-refresh-token',
     'JWT_COOKIE_SECURE': False,

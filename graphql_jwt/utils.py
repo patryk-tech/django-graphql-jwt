@@ -117,3 +117,24 @@ def get_user_by_payload(payload):
 def refresh_has_expired(orig_iat, context=None):
     exp = orig_iat + jwt_settings.JWT_REFRESH_EXPIRATION_DELTA.total_seconds()
     return timegm(datetime.utcnow().utctimetuple()) > exp
+
+
+def jwt_cookie_allowed():
+    """
+    Utility function to test whether the JWT can be stored inside a token.
+
+    It is this author's belief that it should not.
+    """
+    if not jwt_settings.JWT_ALLOW_JWT_COOKIE:
+        return False
+    return True
+
+
+def refresh_token_cookie_allowed():
+    """
+    Utility function to test whether the JWT can be stored inside a token.
+    Allowing it should be safe, though you may want to take CSRF precautions.
+    """
+    if not jwt_settings.JWT_ALLOW_REFRESH_TOKEN_COOKIE:
+        return False
+    return True

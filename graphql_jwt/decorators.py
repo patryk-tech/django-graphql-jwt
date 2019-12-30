@@ -11,6 +11,7 @@ from . import exceptions, signals
 from .refresh_token.shortcuts import refresh_token_lazy
 from .settings import jwt_settings
 from .shortcuts import get_token
+from .utils import jwt_cookie_allowed, refresh_token_cookie_allowed
 
 __all__ = [
     'user_passes_test',
@@ -124,14 +125,16 @@ def jwt_cookie(view_func):
         if hasattr(request, 'jwt_token'):
             expires = datetime.utcnow() + jwt_settings.JWT_EXPIRATION_DELTA
 
-            response.set_cookie(
-                jwt_settings.JWT_COOKIE_NAME,
-                request.jwt_token,
-                expires=expires,
-                httponly=True,
-                secure=jwt_settings.JWT_COOKIE_SECURE,
-            )
-            if hasattr(request, 'jwt_refresh_token'):
+            if jwt_cookie_allowed():
+                response.set_cookie(
+                    jwt_settings.JWT_COOKIE_NAME,
+                    request.jwt_token,
+                    expires=expires,
+                    httponly=True,
+                    secure=jwt_settings.JWT_COOKIE_SECURE,
+                )
+
+            if hasattr(request, 'jwt_refresh_token') and refresh_token_cookie_allowed():
                 refresh_token = request.jwt_refresh_token
                 expires = refresh_token.created +\
                     jwt_settings.JWT_REFRESH_EXPIRATION_DELTA
