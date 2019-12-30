@@ -14,6 +14,8 @@ import os
 
 from datetime import timedelta
 
+from .utils import debug_enabled
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -42,12 +44,15 @@ INSTALLED_APPS = [
     "corsheaders",
     "graphene_django",
     "graphql_jwt.refresh_token",
+    "debug_toolbar",
+    "graphiql_debug_toolbar",
 ]
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "graphiql_debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -131,4 +136,11 @@ GRAPHQL_JWT = {
     "JWT_LONG_RUNNING_REFRESH_TOKEN": True,
     "JWT_REFRESH_EXPIRATION_DELTA": timedelta(minutes=14),
     "JWT_COOKIE_SECURE": True,
+}
+
+DEBUG_TOOLBAR_CONFIG = {
+    # Ignore INTERNAL_IPs and just check that debug is enabled
+    # SECURITY WARNING: this is safe running locally in docker for development
+    # but may expose sensitive information if you run it on a public server.
+    "SHOW_TOOLBAR_CALLBACK": debug_enabled,
 }
