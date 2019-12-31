@@ -145,3 +145,9 @@ DEBUG_TOOLBAR_CONFIG = {
     # but may expose sensitive information if you run it on a public server.
     "SHOW_TOOLBAR_CALLBACK": debug_enabled,
 }
+
+LOGGING = {
+    "version": 1,
+    "handlers": {"console": {"level": "DEBUG", "class": "logging.StreamHandler"}},
+    "loggers": {"django": {"handlers": ["console"], "level": "INFO"}},
+}
